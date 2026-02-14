@@ -1075,7 +1075,7 @@
 
             <div class="hero-visual-container">
                 <div class="hero-image-wrapper">
-                    <img src="p1-1.PNG" 
+                    <img src="./p1-1.png" 
                          alt="Face analysis" 
                          class="hero-face-image" 
                          id="hero-face">
@@ -1330,10 +1330,11 @@
         const heroFace = document.getElementById('hero-face');
         const optimizeBtn = document.getElementById('optimize-btn');
         
-        const originalImage = 'p1-1.PNG';
-        const optimizedImage = 'p1-4.png';
+        const originalImage = './p1-1.png';
+        const optimizedImage = './p1-4.png';
         
         function showOptimized() {
+            if (!heroFace || !optimizeBtn) return;
             optimizeBtn.classList.add('pressed');
             heroFace.classList.add('fade-out');
             
@@ -1344,6 +1345,7 @@
         }
         
         function showOriginal() {
+            if (!heroFace || !optimizeBtn) return;
             optimizeBtn.classList.remove('pressed');
             heroFace.classList.add('fade-out');
             
@@ -1354,15 +1356,15 @@
         }
 
         // 触摸支持：手机/平板长按看对比（GitHub Pages 部署后触屏设备需要）
-        optimizeBtn.addEventListener('touchstart', (e) => {
+        if (optimizeBtn) optimizeBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
             showOptimized();
         }, { passive: false });
-        optimizeBtn.addEventListener('touchend', (e) => {
+        if (optimizeBtn) optimizeBtn.addEventListener('touchend', (e) => {
             e.preventDefault();
             showOriginal();
         }, { passive: false });
-        optimizeBtn.addEventListener('touchcancel', showOriginal);
+        if (optimizeBtn) optimizeBtn.addEventListener('touchcancel', showOriginal);
 
         // Comparison slider - draggable before/after with fixed images
         const compSlider = document.getElementById('comparison-slider');
